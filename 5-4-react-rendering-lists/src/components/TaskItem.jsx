@@ -13,8 +13,8 @@ export default function TaskItem({ task, onToggle, onDelete }) {
         <span className={task.isDone ? "done" : ""}>{task.title}</span>
       </label>
 
-      {/* DueBadge only if task is not done */}
-      {!task.isDone && <DueBadge dueDate={task.dueDate} />}
+      {/* DueBadge only if task is not done and has a due date */}
+      {!task.isDone && task.dueDate && <DueBadge dueDate={task.dueDate} />}
 
       {/* Delete button */}
       <button

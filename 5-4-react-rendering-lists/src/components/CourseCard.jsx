@@ -23,9 +23,9 @@ export default function CourseCard({ course, index, onMutateCourse }) {
     if (!title) return;
     const newTask = {
       id: Date.now(),
-      title,
-      dueDate: date,
-      isDone: false,  // ✅ Task 4 fix
+      title: title.trim(),
+      dueDate: date || "",
+      isDone: false,
     };
     onMutateCourse(index, tasks => [...tasks, newTask]);
     setTitle("");
@@ -39,11 +39,11 @@ export default function CourseCard({ course, index, onMutateCourse }) {
     <article className="course card">
       <header className="cardHeader">
         <h2>{course.title}</h2>
-        {/* ✅ Shows "All caught up" badge when all tasks are done */}
+        {/* All caught up badge */}
         {allDone && <span className="badge">All caught up!</span>}
       </header>
 
-      {/* Task List or Empty State */}
+      {/* Task list or empty state */}
       {course.tasks.length === 0 ? (
         <p>No tasks yet. Add your first one below.</p>
       ) : (
@@ -59,7 +59,7 @@ export default function CourseCard({ course, index, onMutateCourse }) {
         </ul>
       )}
 
-      {/* Add Task Form */}
+      {/* Add task form */}
       <form onSubmit={addTask} className="newTask">
         <input
           className="titleField"
