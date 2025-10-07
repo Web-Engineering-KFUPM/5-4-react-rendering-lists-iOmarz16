@@ -3,14 +3,34 @@ import DueBadge from "./DueBadge";
 export default function TaskItem({ task, onToggle, onDelete }) {
   return (
     <li className="task" key={task.id}>
+      {/* ---------------------------
+          Checkbox + Task Title
+      --------------------------- */}
       <label className="taskMain">
-       
+        <input
+          type="checkbox"
+          checked={task.isDone}
+          onChange={() => onToggle(task.id)}
+        />
+        <span className={task.isDone ? "done" : ""}>{task.title}</span>
       </label>
 
-     
-      <button className="ghost" aria-label="Delete task">
+      {/* ---------------------------
+          DueBadge (conditional)
+      --------------------------- */}
+      {!task.isDone && <DueBadge dueDate={task.dueDate} />}
+
+      {/* ---------------------------
+          Delete Button
+      --------------------------- */}
+      <button
+        className="ghost"
+        aria-label="Delete task"
+        onClick={() => onDelete(task.id)}
+      >
         ✕
       </button>
     </li>
   );
 }
+
