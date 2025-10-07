@@ -3,9 +3,7 @@ import DueBadge from "./DueBadge";
 export default function TaskItem({ task, onToggle, onDelete }) {
   return (
     <li className="task" key={task.id}>
-      {/* ---------------------------
-          Checkbox + Task Title
-      --------------------------- */}
+      {/* Checkbox + Task Title */}
       <label className="taskMain">
         <input
           type="checkbox"
@@ -15,14 +13,10 @@ export default function TaskItem({ task, onToggle, onDelete }) {
         <span className={task.isDone ? "done" : ""}>{task.title}</span>
       </label>
 
-      {/* ---------------------------
-          DueBadge (conditional)
-      --------------------------- */}
+      {/* DueBadge only if task is not done */}
       {!task.isDone && <DueBadge dueDate={task.dueDate} />}
 
-      {/* ---------------------------
-          Delete Button
-      --------------------------- */}
+      {/* Delete button */}
       <button
         className="ghost"
         aria-label="Delete task"
@@ -33,4 +27,3 @@ export default function TaskItem({ task, onToggle, onDelete }) {
     </li>
   );
 }
-

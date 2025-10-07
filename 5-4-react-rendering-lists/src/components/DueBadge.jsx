@@ -8,18 +8,16 @@ function daysUntil(dateStr) {
 }
 
 export default function DueBadge({ dueDate }) {
-  const d = daysUntil(dueDate); 
+  const d = daysUntil(dueDate); // calculate days remaining
   let label = "";
   let className = "badge";
 
-  // ---------------------------
- 
   if (d < 0) {
     label = "Overdue";
-    className += " danger"; 
+    className += " danger";  // ✅ fix: class for overdue
   } else if (d === 0) {
     label = "Due today";
-    className += " warn";   
+    className += " warn";    // ✅ fix: class for today
   } else if (d === 1) {
     label = "1 day remaining";
   } else {

@@ -5,37 +5,33 @@ export default function CourseCard({ course, index, onMutateCourse }) {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
 
-  // ---------------------------
-  // Toggle task completio
+  // Toggle task completion
   function toggleTask(id) {
     onMutateCourse(index, tasks =>
       tasks.map(t => (t.id === id ? { ...t, isDone: !t.isDone } : t))
     );
   }
 
-  // ---------------------------
   // Delete task
   function deleteTask(id) {
     onMutateCourse(index, tasks => tasks.filter(t => t.id !== id));
   }
 
-  // ---------------------------
   // Add new task
   function addTask(e) {
     e.preventDefault();
-    if (!title) return; 
+    if (!title) return;
     const newTask = {
       id: Date.now(),
       title,
       dueDate: date,
-      isDone: false,
+      isDone: false,  // ✅ Task 4 fix
     };
     onMutateCourse(index, tasks => [...tasks, newTask]);
     setTitle("");
     setDate("");
   }
 
-  // ---------------------------
   // Check if all tasks are done
   const allDone = course.tasks.length > 0 && course.tasks.every(t => t.isDone);
 
@@ -43,13 +39,11 @@ export default function CourseCard({ course, index, onMutateCourse }) {
     <article className="course card">
       <header className="cardHeader">
         <h2>{course.title}</h2>
-        {/* Badge: All caught up */}
+        {/* ✅ Shows "All caught up" badge when all tasks are done */}
         {allDone && <span className="badge">All caught up!</span>}
       </header>
 
-      {/* ----------------------------
-          Task List or Empty State
-      ---------------------------- */}
+      {/* Task List or Empty State */}
       {course.tasks.length === 0 ? (
         <p>No tasks yet. Add your first one below.</p>
       ) : (
@@ -65,9 +59,7 @@ export default function CourseCard({ course, index, onMutateCourse }) {
         </ul>
       )}
 
-      {/* ----------------------------
-          Add Task Form
-      ---------------------------- */}
+      {/* Add Task Form */}
       <form onSubmit={addTask} className="newTask">
         <input
           className="titleField"
